@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.repository.HouseRepository;
@@ -23,10 +24,18 @@ public class AdminHouseController {
 	}
 	
 	@GetMapping
-	public String index(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable) {
+	public String index(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable, @RequestParam(name = "keyword", required = false) String keyword) {
 		// ページネーションを付与
-		Page<House> housePage = houseRepository.findAll(pageable);
+		Page<House> housePage;
+		
+		if (keyword != null && !keyword.isEmpty()) {
+			// 検索する場合は部分一致で探す
+			housePage = houseRepository.findByNameLike("%" + keyword + "%", pageable);
+		} else {
+			housePage = houseRepository.findAll(pageable);
+		}
 		model.addAttribute("housePage", housePage);
+		model.addAttribute("keyword", keyword);
 		
 		return "admin/houses/index";
 	}
