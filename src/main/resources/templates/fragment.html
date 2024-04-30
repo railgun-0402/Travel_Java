@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<!-- meta要素の部品化 -->
+		<div th:fragment="meta" th:remove="tag">
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+		</div>
+		
+		<!-- link要素の部品化 -->
+		<div th:fragment="styles" th:remove="tag">
+			<!-- Bootstrap -->
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+			
+			<!-- Google Fonts -->
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+			
+			<link th:href="@{/css/style.css}" rel="stylesheet" >
+		</div>
+		
+		<title>部品化用のHTMLファイル</title>
+	</head>
+	<body>
+		<!-- ヘッダーの部品化 -->
+		<div th:fragment="header" th:remove="tag">
+			<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm samuraitravel-navbar">
+				<div class="container samuraitravel-container">
+					<a class="navbar-brand" th:href="@{/}">
+						<img class="samuraitravel-logo me-1" th:src="@{/images/logo.png}" alt="SAMURAI">
+					</a>
+				</div>
+			</nav>
+		</div>
+		
+		<!-- フッターの部品化 -->
+		<div th:fragment="footer" th:remove="tag">
+			<footer>
+				<div class="d-flex justify-content-center align-items-center h-100">
+					<p class="text-center text-muted small mb-0">&copy; SAMURAI Travel All rights reserved.</p>
+				</div>
+			</footer>
+		</div>
+		
+		<!-- script要素の部品化 -->
+		<div th:fragment="scripts" th:remove="tag">
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+		</div>
+	</body>
+</html>

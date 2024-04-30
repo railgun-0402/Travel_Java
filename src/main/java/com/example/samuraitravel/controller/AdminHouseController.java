@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,5 +40,13 @@ public class AdminHouseController {
 		
 		return "admin/houses/index";
 	}
-
+	
+	@GetMapping("/{id}")
+	public String show(@PathVariable(name = "id") Integer id, Model model) {
+		// URLのidと一致する民宿データを1つだけ取得
+		House house = houseRepository.getReferenceById(id);
+		model.addAttribute("house", house);
+		
+		return "admin/houses/show";		
+	}
 }
